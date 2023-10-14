@@ -1,0 +1,9 @@
+{
+    "clientes":[
+    {"id":1,"cpfCnpj":11122233344, "name":"Joao", "cep":13000222, "pagaCerto":true},
+    {"id":2,"cpfCnpj":11122233345, "name":"Joao", "cep":13000222, "pagaCerto":true},
+    {"id":3,"cpfCnpj":12345678901234, "name":"Joao", "cep":13000222, "pagaCerto":true},
+    {"id":4,"cpfCnpj":11122233347, "name":"Joao", "cep":13000222, "pagaCerto":true},
+    {"id":5,"cpfCnpj":12345678901235, "name":"Joao", "cep":13000222, "pagaCerto":true}
+    ]
+}
