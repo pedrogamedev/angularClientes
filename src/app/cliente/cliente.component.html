@@ -1,1 +1,21 @@
-<div class="container">tester</div>
+<div class="container">Lista de clientes!</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>CNPJ/CPF</th>
+            <th>NOME</th>
+            <th>CEP</th>
+            <th>PAGACERTO?</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let c of clientes">
+            <th scope="row">{{c.id}}</th>
+            <td>{{c.cpfCnpj}}</td>
+            <td>{{c.nome}}</td>
+            <td>{{c.cep}}</td>
+            <td>{{c.pagaCerto}}</td>
+        </tr>
+    </tbody>
+</table>
