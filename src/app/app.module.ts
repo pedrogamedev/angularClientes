@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import ClienteComponent from './cliente/cliente.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { FormGroup, FormControl, Validators, FormBuilder }  from '@angular/forms';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
+
 import { HttpClientModule} from '@angular/common/http'
 
 @NgModule({
@@ -17,7 +20,9 @@ import { HttpClientModule} from '@angular/common/http'
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

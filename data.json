@@ -1,9 +1,28 @@
 {
-    "clientes":[
-    {"id":1,"cpfCnpj":11122233344, "nome":"Joao", "cep":13020222, "pagaCerto":true},
-    {"id":2,"cpfCnpj":11122233345, "nome":"Joao2", "cep":13003322, "pagaCerto":false},
-    {"id":3,"cpfCnpj":12345678901234, "nome":"Joao3", "cep":13200222, "pagaCerto":false},
-    {"id":4,"cpfCnpj":11122233347, "nome":"Joao4", "cep":13044222, "pagaCerto":true},
-    {"id":5,"cpfCnpj":12345678901235, "nome":"Joao5", "cep":13055122, "pagaCerto":true}
-    ]
+  "clientes": [
+    {
+      "id": 1
+    },
+    {
+      "nome": "",
+      "cep": 2,
+      "cpfCnpj": 32,
+      "pagaCerto": false,
+      "id": 2
+    },
+    {
+      "nome": null,
+      "cep": null,
+      "cpfCnpj": null,
+      "pagaCerto": null,
+      "id": 3
+    },
+    {
+      "nome": "2",
+      "cep": 2,
+      "cpfCnpj": 3,
+      "pagaCerto": null,
+      "id": 4
+    }
+  ]
 }

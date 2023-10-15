@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import ClienteComponent from './cliente.component';
+import { FormGroup } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('ClienteComponent', () => {
   let component: ClienteComponent;
