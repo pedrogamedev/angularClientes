@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ClienteServiceService {
   clientes: Cliente[] = [];
-  baseURL: string = "http://localhost:4200/clientes";
+  baseURL: string = "http://localhost:3000/clientes";
 
   //inserindo itens na lista
   constructor(private http: HttpClient){
@@ -26,5 +26,8 @@ export class ClienteServiceService {
     let url =`${this.baseURL}/${cliente.id}`
     return this.http.delete<void>(url);
   }
-  
+  update(cliente: Cliente): Observable<Cliente>{
+    let url = `${this.baseURL}/${cliente.id}`;
+    return this.http.put<Cliente>(url, cliente);
+  }
 }

@@ -5,42 +5,48 @@
   <small class="form-text text-muted">Seus dados nao serao compartilhados!</small>
 
   <div class="mb-3">
-    <label for="nome"></label>
+    <label for="nome">Nome</label>
     <input name="nome" formControlName="nome" type="text" class="form-control" id="nome"  >
   </div>
   <div class="mb-3">
-    <label for="cpfCnpj"></label>
+    <label for="cpfCnpj">CPF ou CNPJ</label>
     <input name="cpfCnpj" formControlName="cpfCnpj"type="number" class="form-control" id="cpfCnpj">
   </div>
-  <div class="form-group">
-    <label for="cep"></label>
+  <div class="mb-3">
+    <label for="cep">CEP</label>
     <input name="cep" type="number" formControlName="cep"class="form-control" id="cep" >
   </div>
-  <div class="form-group">
-    <input type="checkbox" class="form-check-input">
-    <label name="pagaCerto" formControlName="pagaCerto"class="form-check-label" for="pagaCerto">Check me out</label>
+  <div class="mb-3">
+    <label for="pagaCerto">O cliente paga certo?</label>
+    <input name="pagaCerto" type="text" formControlName="pagaCerto"class="form-control" id="pagaCerto" >
   </div>
-  <button type="submit"(click)="save()" class="btn btn-primary">Salvar</button>
+  <button type="submit"(click)="save()" class="btn btn-primary me-2">Salvar</button>
+  <button class="btn btn-primary" (click)="cancel()" >Cancelar</button>
+
 </form>
 
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>CNPJ/CPF</th>
-            <th>NOME</th>
-            <th>CEP</th>
-            <th>PAGACERTO?</th>
+            <th scope="col-1">ID</th>
+            <th scope="col-2">CNPJ/CPF</th>
+            <th scope="col-2">NOME</th>
+            <th scope="col-2">CEP</th>
+            <th scope="col-2">PAGACERTO?</th>
+            <th scope="col-2" class="text-center">Opcoes</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let c of clientes">
-            <th scope="row">{{c.id}}</th>
-            <td>{{c.cpfCnpj}}</td>
-            <td>{{c.nome}}</td>
-            <td>{{c.cep}}</td>
-            <td>{{c.pagaCerto}}</td>
-            <td><button class="btn btn-dange" (click)="delete(c)">Remover</button></td>
+            <th scope="row" class="col-1">{{c.id}}</th>
+            <td class="col-2">{{c.cpfCnpj}}</td>
+            <td class="col-2">{{c.nome}}</td>
+            <td class="col-2">{{c.cep}}</td>
+            <td class="col-2">{{c.pagaCerto}}</td>
+            <td class="col-2">
+            <button class="btn btn-danger me-2" (click)="delete(c)">Remover</button>
+            <button class="btn btn-success" (click)="edit(c)">Editar</button>
+            </td>
         </tr>
     </tbody>
 </table>

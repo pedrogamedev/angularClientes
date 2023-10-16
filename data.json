@@ -1,28 +1,11 @@
 {
   "clientes": [
     {
-      "id": 1
-    },
-    {
       "nome": "",
-      "cep": 2,
-      "cpfCnpj": 32,
-      "pagaCerto": false,
-      "id": 2
-    },
-    {
-      "nome": null,
       "cep": null,
       "cpfCnpj": null,
-      "pagaCerto": null,
-      "id": 3
-    },
-    {
-      "nome": "2",
-      "cep": 2,
-      "cpfCnpj": 3,
-      "pagaCerto": null,
-      "id": 4
+      "pagaCerto": "",
+      "id": 1
     }
   ]
 }

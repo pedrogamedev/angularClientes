@@ -12,6 +12,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 //onInit -> ciclo de vida do componente, nesse caso eh implementado na inicializacao
 export default class ClienteComponent implements OnInit {
   clientes: Cliente[] = [];
+  isEditing: boolean = false;
+  selectedCliente: Cliente = {} as Cliente;
   formGroup: FormGroup;
   
   //injetando servico (DI)
@@ -19,9 +21,9 @@ export default class ClienteComponent implements OnInit {
   private formBuilder: FormBuilder){
     this.formGroup = formBuilder.group({
       nome:[''],
-      cep: 2,
-      cpfCnpj: 32,
-      pagaCerto: false
+      cep: undefined,
+      cpfCnpj: undefined,
+      pagaCerto: ['']
     });
   }
 
@@ -36,15 +38,39 @@ export default class ClienteComponent implements OnInit {
 
   save()
   {
-    let cliente = this.formGroup.value;
-    this.service.save(cliente).subscribe(
+    if(this.isEditing)
+    {
+      //atualiza os dados do produto selecionado, esta no modo editing
+      this.selectedCliente.nome = this.formGroup.get("nome")?.value;
+      this.selectedCliente.cep = this.formGroup.get("cep")?.value;
+      this.selectedCliente.pagaCerto = this.formGroup.get("pagaCerto")?.value;
+      this.selectedCliente.cpfCnpj = this.formGroup.get("cpfCnpj")?.value;
+
+      this.service.update(this.selectedCliente).subscribe({
+        next:() =>{
+          this.formGroup.reset();
+          this.isEditing = false;
+        }
+      })
+    }
+    else
+    {
+      this.service.save(this.formGroup.value).subscribe(
       {
         next: cliente =>{
           this.clientes.push(cliente);
           this.formGroup.reset();
         }
       }
-    )
+      )
+    }
+  }
+
+  edit(cliente: Cliente)
+  {
+    this.selectedCliente = cliente;
+    this.isEditing = true;
+    this.formGroup.setValue({"nome": cliente.nome,"cep": cliente.cep,"cpfCnpj": cliente.cpfCnpj,"pagaCerto": cliente.pagaCerto})
   }
 
   delete(cliente: Cliente)
@@ -57,5 +83,9 @@ export default class ClienteComponent implements OnInit {
         }
       }
     )
+  }
+    cancel() {
+    this.formGroup.reset();
+    this.isEditing = false;
   }
 }
