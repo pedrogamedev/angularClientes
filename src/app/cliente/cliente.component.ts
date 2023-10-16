@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from '../models/cliente';
 import { ClienteServiceService } from '../cliente-service.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cliente',
@@ -15,15 +15,16 @@ export default class ClienteComponent implements OnInit {
   isEditing: boolean = false;
   selectedCliente: Cliente = {} as Cliente;
   formGroup: FormGroup;
+  submitted: boolean = false;
   
   //injetando servico (DI)
   constructor(private service: ClienteServiceService,
   private formBuilder: FormBuilder){
     this.formGroup = formBuilder.group({
-      nome:[''],
-      cep: undefined,
-      cpfCnpj: undefined,
-      pagaCerto: ['']
+      nome:['', [Validators.required, Validators.minLength(3)]],
+      cep: ['', [Validators.required, Validators.min(10000000)]],
+      cpfCnpj: ['', [Validators.required, Validators.min(10000000000)]],
+      pagaCerto: ['', [Validators.required, Validators.minLength(3)]]
     });
   }
 
@@ -38,31 +39,38 @@ export default class ClienteComponent implements OnInit {
 
   save()
   {
-    if(this.isEditing)
-    {
-      //atualiza os dados do produto selecionado, esta no modo editing
-      this.selectedCliente.nome = this.formGroup.get("nome")?.value;
-      this.selectedCliente.cep = this.formGroup.get("cep")?.value;
-      this.selectedCliente.pagaCerto = this.formGroup.get("pagaCerto")?.value;
-      this.selectedCliente.cpfCnpj = this.formGroup.get("cpfCnpj")?.value;
 
-      this.service.update(this.selectedCliente).subscribe({
-        next:() =>{
-          this.formGroup.reset();
-          this.isEditing = false;
-        }
-      })
-    }
-    else
+    this.submitted =true;
+    if(this.formGroup.valid)
     {
-      this.service.save(this.formGroup.value).subscribe(
+      if(this.isEditing)
       {
-        next: cliente =>{
-          this.clientes.push(cliente);
-          this.formGroup.reset();
-        }
+        //atualiza os dados do produto selecionado, esta no modo editing
+        this.selectedCliente.nome = this.formGroup.get("nome")?.value;
+        this.selectedCliente.cep = this.formGroup.get("cep")?.value;
+        this.selectedCliente.pagaCerto = this.formGroup.get("pagaCerto")?.value;
+        this.selectedCliente.cpfCnpj = this.formGroup.get("cpfCnpj")?.value;
+
+        this.service.update(this.selectedCliente).subscribe({
+          next:() =>{
+            this.formGroup.reset();
+            this.isEditing = false;
+            this.submitted = false;
+          }
+        })
       }
-      )
+      else
+      {
+        this.service.save(this.formGroup.value).subscribe(
+        {
+          next: cliente =>{
+            this.clientes.push(cliente);
+            this.formGroup.reset();
+            this.submitted = false;
+          }
+        }
+        )
+      }
     }
   }
 
@@ -87,5 +95,23 @@ export default class ClienteComponent implements OnInit {
     cancel() {
     this.formGroup.reset();
     this.isEditing = false;
+    this.submitted = false;
+  }
+
+  get nome(): any
+  {
+    return this.formGroup.get("nome");
+  }  
+  get cpfCnpj(): any
+  {
+    return this.formGroup.get("cpfCnpj");
+  }  
+  get cep(): any
+  {
+    return this.formGroup.get("cep");
+  }  
+  get pagaCerto(): any
+  {
+    return this.formGroup.get("pagaCerto");
   }
 }

@@ -6,6 +6,13 @@
       "cpfCnpj": null,
       "pagaCerto": "",
       "id": 1
+    },
+    {
+      "nome": "joao",
+      "cep": 22222222,
+      "cpfCnpj": 2222222222,
+      "pagaCerto": "sim",
+      "id": 2
     }
   ]
 }
